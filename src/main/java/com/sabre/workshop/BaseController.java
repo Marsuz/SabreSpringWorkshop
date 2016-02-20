@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+
 
 @Controller
 @EnableAutoConfiguration
@@ -23,12 +25,17 @@ public class BaseController {
     @Autowired
     private CounterBean counter;
 
+    @Autowired
+    @Resource(name = "inMemoryRepo")
+    private Repo repo;
+
     @RequestMapping("/")
     @ResponseBody
     String home() {
         String message = "Hello World! ";
         message += "Current count: " + counter.incrementAndGet() + " ";
         message += "Composable Bean: ";
+        message += "Repo: " + repo.toString();
         return message;
     }
 
