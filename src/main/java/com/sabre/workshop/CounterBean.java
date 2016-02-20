@@ -2,6 +2,7 @@ package com.sabre.workshop;
 
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,7 +14,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class CounterBean implements InitializingBean {
 
-    private final AtomicInteger counter = new AtomicInteger(0);
+    @Value("${counter.initialVal}")
+    private Integer initialVal;
+
+    private  AtomicInteger counter;
 
     public Integer incrementAndGet() {
         return counter.incrementAndGet();
@@ -25,6 +29,6 @@ public class CounterBean implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println(counter.get());
+        counter = new AtomicInteger(initialVal);
     }
 }

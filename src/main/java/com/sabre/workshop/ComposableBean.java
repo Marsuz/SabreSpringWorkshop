@@ -21,6 +21,9 @@ public class ComposableBean implements InitializingBean, DisposableBean{
     @Autowired
     private CounterBean counterBean;
 
+    @Autowired
+    private PrototypeBean prototypeBean;
+
     final static Logger logger = LoggerFactory.getLogger(CounterBean.class);
 
 
@@ -33,5 +36,9 @@ public class ComposableBean implements InitializingBean, DisposableBean{
     public void afterPropertiesSet() throws Exception {
         Assert.notNull(counterBean, "counter bean not null");
         logger.info("Initializing ComposableBean!");
+    }
+
+    public String getPrototypeBeanInfo() {
+        return prototypeBean.toString();
     }
 }

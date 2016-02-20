@@ -10,7 +10,7 @@ public class SpringTrainingApp {
     public static void main(String[] args) {
 
         System.out.println("Hello World!");
-        SpringApplication.run(BaseController.class, args);
+        SpringApplication.run(AppConfiguration.class, args);
     }
 
 }

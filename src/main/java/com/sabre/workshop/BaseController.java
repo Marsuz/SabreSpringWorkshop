@@ -5,8 +5,6 @@ package com.sabre.workshop;
  */
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,27 +13,31 @@ import javax.annotation.Resource;
 
 
 @Controller
-@EnableAutoConfiguration
-@ComponentScan(value = "com.sabre.workshop")
 public class BaseController {
 
     @Autowired
     private ComposableBean composableBean;
 
     @Autowired
-    private CounterBean counter;
+    private CounterBean counterBean;
+
+    @Autowired
+    private PrototypeBean prototypeBean;
 
     @Autowired
     @Resource(name = "inMemoryRepo")
+    //@Resource(name = "notImplementedRepo")
     private Repo repo;
 
     @RequestMapping("/")
     @ResponseBody
     String home() {
-        String message = "Hello World! ";
-        message += "Current count: " + counter.incrementAndGet() + " ";
-        message += "Composable Bean: ";
-        message += "Repo: " + repo.toString();
+        String message = "Hello World! <br/>";
+        message += "Current count: " + counterBean.incrementAndGet() + "<br/>";
+        message += "Composable Bean: <br/>";
+        message += "Repo: " + repo.toString() + "<br/>";
+        message += "BaseController prototypeBean: " + prototypeBean.toString() + "<br/>";
+        message += "ComposableBean prototypeBea: " + composableBean.getPrototypeBeanInfo() + "<br/>";
         return message;
     }
 
