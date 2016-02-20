@@ -9,3 +9,12 @@ group = 'com.sabre.workshop'
 
 sourceCompatibility =1.8
 targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:1.3.2.RELEASE"
+}
